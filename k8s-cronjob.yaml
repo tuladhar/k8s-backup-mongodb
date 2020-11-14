@@ -1,0 +1,51 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-mongodb
+spec:
+  # backup every hour
+  schedule: "0 */1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          concurrencyPolicy: Forbid
+          suspend: false
+          successfulJobsHistoryLimit: 3
+          failedJobsHistoryLimit: 1
+          
+          containers:
+          - name: backup-mongodb
+            image: ptuladhar/k8s-backup-mongodb:latest
+            env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-uri
+                  key: MONGODB_URI              
+
+            - name: BUCKET_URI
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: BUCKET_URI
+
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: AWS_ACCESS_KEY_ID
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: AWS_SECRET_ACCESS_KEY
+
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: AWS_DEFAULT_REGION
+
