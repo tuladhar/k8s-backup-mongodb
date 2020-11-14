@@ -1,2 +1,3 @@
-# k8s-backup-mongo
-A docker image to run MongoDB backup using Kubernetes CronJob.
+# Schedule MongoDB Backup  to S3 using Kubernetes CronJob
+
+![](images/cover.png)
