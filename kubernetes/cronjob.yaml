@@ -7,13 +7,14 @@ spec:
   schedule: "0 */1 * * *"
   jobTemplate:
     spec:
+      concurrencyPolicy: Forbid
+      suspend: false
+      successfulJobsHistoryLimit: 3
+      failedJobsHistoryLimit: 1
+
       template:
         spec:
           restartPolicy: OnFailure
-          concurrencyPolicy: Forbid
-          suspend: false
-          successfulJobsHistoryLimit: 3
-          failedJobsHistoryLimit: 1
           
           containers:
           - name: backup-mongodb
