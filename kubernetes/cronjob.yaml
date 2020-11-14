@@ -3,15 +3,14 @@ kind: CronJob
 metadata:
   name: backup-mongodb
 spec:
-  # backup every hour
   schedule: "0 */1 * * *"
+  concurrencyPolicy: Forbid
+  suspend: false
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  
   jobTemplate:
     spec:
-      concurrencyPolicy: Forbid
-      suspend: false
-      successfulJobsHistoryLimit: 3
-      failedJobsHistoryLimit: 1
-
       template:
         spec:
           restartPolicy: OnFailure
