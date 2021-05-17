@@ -23,7 +23,10 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongodb-uri
-                  key: MONGODB_URI              
+                  key: MONGODB_URI
+            
+            - name: MONGODB_OPLOG
+              value: true
 
             - name: BUCKET_URI
               valueFrom:
