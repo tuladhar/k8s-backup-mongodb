@@ -16,7 +16,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build -t rightsaidfred/mongodb-s3:$(date +%s) .
-    - name: tag image
-      run: docker tag rightsaidfred/mongodb-s3:$(date +%s)  rightsaidfred/mongodb-s3:latest
-    - name: Push Docker image  
-      run: docker push rightsaidfred/mongodb-s3:latest
+
