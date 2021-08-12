@@ -1,4 +1,4 @@
-FROM mongo:latest
+FROM mongo:latest 
 
 RUN apt update
 RUN apt install awscli -y
