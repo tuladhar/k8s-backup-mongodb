@@ -18,4 +18,4 @@ jobs:
       run: docker build -t rightsaidfred/mongodb-s3:$(date +%s) .
 
     - name: Push Docker image  
-      run: docker push rightsaidfred/mongodb-s3:$(date +%s)
+      run: docker push rightsaidfred/mongodb-s3
