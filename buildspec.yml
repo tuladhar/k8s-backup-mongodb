@@ -1,4 +1,6 @@
 version: 0.2
+- name: Build and push Docker images
+  uses: docker/build-push-action@v2.6.1
 
 phases:
   pre_build:
@@ -10,9 +12,9 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t mongodb-s3:latest .
-      - docker tag mongodb-s3:latest 602955111154.dkr.ecr.us-east-2.amazonaws.com/mongodb-s3:latest      
+      - docker tag mongodb-s3:latest 602955111154.dkr.ecr.us-east-2.amazonaws.com/mongodb-s3:1.1.0     
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 602955111154.dkr.ecr.us-east-2.amazonaws.com/mongodb-s3:latest 
+      - docker push 602955111154.dkr.ecr.us-east-2.amazonaws.com/mongodb-s3:1.1.0

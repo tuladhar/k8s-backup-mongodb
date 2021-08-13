@@ -28,4 +28,4 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: rightsaidfred/mongodb-s3:latest
+        tags: rightsaidfred/mongodb-s3:1.1.0
