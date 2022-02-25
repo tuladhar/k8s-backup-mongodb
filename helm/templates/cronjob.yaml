@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-mongodb
+  namespace: backup-mongodb
+spec:
+  schedule: {{ .Values.schedule | quote}}
+  concurrencyPolicy: Forbid
+  suspend: false
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup-mongodb
+            image: {{ .Values.image }}
+            env:
+            - name: MONGODB_URI
+              value: {{ .Values.mongoDbUri | quote}}
+            - name: MONGODB_OPLOG
+              value: {{ .Values.withOplog | quote}}
+            - name: BUCKET_URI
+              value: {{ .Values.bucketUri | quote }}
+            - name: AWS_ACCESS_KEY_ID
+              value: {{ .Values.awsAccessKeyId | quote}}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: {{ .Values.awsSecretAccessKey | quote }}
+            - name: AWS_DEFAULT_REGION
+              value: {{ .Values.awsDefaultRegion | quote}}
+            - name: S3_ENDPOINT_URL
+              value: {{ .Values.s3EndpointUrl | quote }}
+            - name: PASSWORD_7ZIP
+              value: {{ .Values.password7Zip | quote }}
+
+
+
