@@ -1,0 +1,15 @@
+# Default values for k8s-backup-mongodb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+schedule: "\"0 1 * * *\""
+image: "ptuladhar/k8s-backup-mongodb:latest"
+
+withOplog: true
+mongoDbUri: ""
+bucketUri: ""
+awsAccessKeyId: ""
+awsSecretAccessKey: ""
+s3EndpointUrl: ""
+awsDefaultRegion: ""
+password7Zip: ""
